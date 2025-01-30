@@ -20,6 +20,6 @@
             }
         };
     </script>
-    <script src="https://cdn.jsdelivr.net/gh/WayneSimpson/n8n-chatbot-template@ba944c3/chat-widget.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bta4935/Web-Chatbot@v1.0/chat-widget.js"></script>
     <!-- Widget Script -->
     

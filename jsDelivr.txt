@@ -1,0 +1,7 @@
+Use the Updated Version on jsDelivr:
+
+Once your updated file is pushed to GitHub, you can use jsDelivr’s CDN to load your version:
+
+https://cdn.jsdelivr.net/gh/YOUR_USERNAME/n8n-chatbot-template@latest/chat-widget.js
+
+Replace YOUR_USERNAME with your GitHub username.
