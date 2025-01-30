@@ -3,10 +3,10 @@
     // Create and inject styles
     const styles = `
         .n8n-chat-widget {
-            --chat--color-primary: var(--n8n-chat-primary-color, #854fff);
-            --chat--color-secondary: var(--n8n-chat-secondary-color, #6b3fd4);
-            --chat--color-background: var(--n8n-chat-background-color, #ffffff);
-            --chat--color-font: var(--n8n-chat-font-color, #333333);
+            --chat--color-primary: var(--n8n-chat-primary-color, #0b0909);
+            --chat--color-secondary: var(--n8n-chat-secondary-color, #8c8c8c);
+            --chat--color-background: var(--n8n-chat-background-color, #F8F8FF);
+            --chat--color-font: var(--n8n-chat-font-color, #000000);
             font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
@@ -304,8 +304,8 @@
             primaryColor: '',
             secondaryColor: '',
             position: 'right',
-            backgroundColor: '#ffffff',
-            fontColor: '#333333'
+            backgroundColor: '#F8F8FF',
+            fontColor: '#000000'
         }
     };
 
