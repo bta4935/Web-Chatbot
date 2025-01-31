@@ -59,7 +59,7 @@
             align-items: center;
             justify-content: center;
             transition: color 0.2s;
-            font-size: 40px;
+            font-size: 30px;
             opacity: 0.6;
         }
 
@@ -178,72 +178,23 @@
         }
 
         .n8n-chat-widget .chat-input {
-            padding: 0;
-            margin: 0;
+            padding: 16px;
             background: var(--chat--color-background);
             border-top: 1px solid rgba(133, 79, 255, 0.1);
             display: flex;
-            align-items: center;
-        }
-
-        .n8n-chat-widget .file-upload-button {
-            background: none;
-            border: none;
-            padding: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.6;
-            transition: opacity 0.2s;
-        }
-
-        .n8n-chat-widget .file-upload-button:hover {
-            opacity: 1;
-        }
-
-        .n8n-chat-widget .file-upload-button svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--chat--color-font);
-        }
-
-        .n8n-chat-widget .file-preview {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            background: rgba(133, 79, 255, 0.1);
-            border-radius: 4px;
-            margin: 4px;
-            max-width: 200px;
-        }
-
-        .n8n-chat-widget .file-preview img {
-            max-width: 50px;
-            max-height: 50px;
-            object-fit: cover;
-            margin-right: 8px;
-        }
-
-        .n8n-chat-widget .file-name {
-            font-size: 12px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            gap: 8px;
         }
 
         .n8n-chat-widget .chat-input textarea {
             flex: 1;
-            padding: 0;
-            margin: 0;
+            padding: 12px;
             border: 1px solid rgba(133, 79, 255, 0.2);
-            border-radius: 0;
+            border-radius: 8px;
             background: var(--chat--color-background);
             color: var(--chat--color-font);
             resize: none;
             font-family: inherit;
             font-size: 14px;
-            min-height: 30px;
         }
 
         .n8n-chat-widget .chat-input textarea::placeholder {
@@ -414,12 +365,6 @@
             <div class="chat-input">
                 <textarea placeholder="Type your message here..." rows="1"></textarea>
                 <button type="submit">Send</button>
-                <button class="file-upload-button" title="Upload file">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                    </svg>
-                </button>
-                <input type="file" style="display: none;" accept="image/*,.pdf,.doc,.docx,.txt">
             </div>
             <div class="chat-footer">
             
@@ -445,10 +390,6 @@
     const messagesContainer = chatContainer.querySelector('.chat-messages');
     const textarea = chatContainer.querySelector('textarea');
     const sendButton = chatContainer.querySelector('button[type="submit"]');
-    const fileUploadButton = chatContainer.querySelector('.file-upload-button');
-    const fileInput = chatContainer.querySelector('input[type="file"]');
-    const filePreview = chatContainer.querySelector('.file-preview');
-    const fileName = chatContainer.querySelector('.file-name');
 
     function generateUUID() {
         return crypto.randomUUID();
@@ -547,22 +488,7 @@
             }
         }
     });
-
-    fileUploadButton.addEventListener('click', () => {
-        fileInput.click();
-    });
-
-    fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.addEventListener('load', () => {
-            filePreview.querySelector('img').src = reader.result;
-            fileName.textContent = file.name;
-            filePreview.style.display = 'flex';
-        });
-        reader.readAsDataURL(file);
-    });
-
+    
     toggleButton.addEventListener('click', () => {
         chatContainer.classList.toggle('open');
     });
