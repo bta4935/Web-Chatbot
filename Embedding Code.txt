@@ -2,7 +2,7 @@
     <script>
         window.ChatWidgetConfig = {
             webhook: {
-                url: 'https://n8n-nkh3.onrender.com/webhook/92fde4fa-826a-4d31-a652-17fb42843d1b/chat',
+                url: '<Enter Webhook URL>', // enter Webhook url for chatbot to communicate to backend
                 route: 'general'
             },
             branding: {
@@ -22,4 +22,3 @@
     </script>
     <script src="https://cdn.jsdelivr.net/gh/bta4935/Web-Chatbot@v1.0/chat-widget.js"></script>
     <!-- Widget Script -->
-    
