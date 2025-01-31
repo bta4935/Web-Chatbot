@@ -414,15 +414,12 @@
             <div class="chat-input">
                 <textarea placeholder="Type your message here..." rows="1"></textarea>
                 <button type="submit">Send</button>
-                <button class="file-upload-button">
+                <button class="file-upload-button" title="Upload file">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2.5 21.5l4.5-.838A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.476 0-2.886-.313-4.156-.878l-3.156.586.586-3.156A7.962 7.962 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                     </svg>
                 </button>
-                <div class="file-preview">
-                    <img src="" alt="">
-                    <span class="file-name"></span>
-                </div>
+                <input type="file" style="display: none;" accept="image/*,.pdf,.doc,.docx,.txt">
             </div>
             <div class="chat-footer">
             
@@ -449,6 +446,7 @@
     const textarea = chatContainer.querySelector('textarea');
     const sendButton = chatContainer.querySelector('button[type="submit"]');
     const fileUploadButton = chatContainer.querySelector('.file-upload-button');
+    const fileInput = chatContainer.querySelector('input[type="file"]');
     const filePreview = chatContainer.querySelector('.file-preview');
     const fileName = chatContainer.querySelector('.file-name');
 
@@ -551,19 +549,18 @@
     });
 
     fileUploadButton.addEventListener('click', () => {
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-            reader.addEventListener('load', () => {
-                filePreview.querySelector('img').src = reader.result;
-                fileName.textContent = file.name;
-                filePreview.style.display = 'flex';
-            });
-            reader.readAsDataURL(file);
-        });
         fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+            filePreview.querySelector('img').src = reader.result;
+            fileName.textContent = file.name;
+            filePreview.style.display = 'flex';
+        });
+        reader.readAsDataURL(file);
     });
 
     toggleButton.addEventListener('click', () => {
