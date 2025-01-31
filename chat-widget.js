@@ -59,7 +59,7 @@
             align-items: center;
             justify-content: center;
             transition: color 0.2s;
-            font-size: 30px;
+            font-size: 40px;
             opacity: 0.6;
         }
 
@@ -178,23 +178,72 @@
         }
 
         .n8n-chat-widget .chat-input {
-            padding: 16px;
+            padding: 0;
+            margin: 0;
             background: var(--chat--color-background);
             border-top: 1px solid rgba(133, 79, 255, 0.1);
             display: flex;
-            gap: 8px;
+            align-items: center;
+        }
+
+        .n8n-chat-widget .file-upload-button {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .n8n-chat-widget .file-upload-button:hover {
+            opacity: 1;
+        }
+
+        .n8n-chat-widget .file-upload-button svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--chat--color-font);
+        }
+
+        .n8n-chat-widget .file-preview {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            background: rgba(133, 79, 255, 0.1);
+            border-radius: 4px;
+            margin: 4px;
+            max-width: 200px;
+        }
+
+        .n8n-chat-widget .file-preview img {
+            max-width: 50px;
+            max-height: 50px;
+            object-fit: cover;
+            margin-right: 8px;
+        }
+
+        .n8n-chat-widget .file-name {
+            font-size: 12px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .n8n-chat-widget .chat-input textarea {
             flex: 1;
-            padding: 12px;
+            padding: 0;
+            margin: 0;
             border: 1px solid rgba(133, 79, 255, 0.2);
-            border-radius: 8px;
+            border-radius: 0;
             background: var(--chat--color-background);
             color: var(--chat--color-font);
             resize: none;
             font-family: inherit;
             font-size: 14px;
+            min-height: 30px;
         }
 
         .n8n-chat-widget .chat-input textarea::placeholder {
@@ -253,8 +302,11 @@
         }
 
         .n8n-chat-widget .chat-footer {
-    display: none;
-}
+            padding: 8px;
+            text-align: center;
+            background: var(--chat--color-background);
+            border-top: 1px solid rgba(133, 79, 255, 0.1);
+        }
 
         .n8n-chat-widget .chat-footer a {
             color: var(--chat--color-primary);
@@ -362,6 +414,15 @@
             <div class="chat-input">
                 <textarea placeholder="Type your message here..." rows="1"></textarea>
                 <button type="submit">Send</button>
+                <button class="file-upload-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2.5 21.5l4.5-.838A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.476 0-2.886-.313-4.156-.878l-3.156.586.586-3.156A7.962 7.962 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+                    </svg>
+                </button>
+                <div class="file-preview">
+                    <img src="" alt="">
+                    <span class="file-name"></span>
+                </div>
             </div>
             <div class="chat-footer">
             
@@ -387,6 +448,9 @@
     const messagesContainer = chatContainer.querySelector('.chat-messages');
     const textarea = chatContainer.querySelector('textarea');
     const sendButton = chatContainer.querySelector('button[type="submit"]');
+    const fileUploadButton = chatContainer.querySelector('.file-upload-button');
+    const filePreview = chatContainer.querySelector('.file-preview');
+    const fileName = chatContainer.querySelector('.file-name');
 
     function generateUUID() {
         return crypto.randomUUID();
@@ -485,7 +549,23 @@
             }
         }
     });
-    
+
+    fileUploadButton.addEventListener('click', () => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                filePreview.querySelector('img').src = reader.result;
+                fileName.textContent = file.name;
+                filePreview.style.display = 'flex';
+            });
+            reader.readAsDataURL(file);
+        });
+        fileInput.click();
+    });
+
     toggleButton.addEventListener('click', () => {
         chatContainer.classList.toggle('open');
     });
