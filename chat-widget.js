@@ -253,11 +253,8 @@
         }
 
         .n8n-chat-widget .chat-footer {
-            padding: 8px;
-            text-align: center;
-            background: var(--chat--color-background);
-            border-top: 1px solid rgba(133, 79, 255, 0.1);
-        }
+    display: none;
+}
 
         .n8n-chat-widget .chat-footer a {
             color: var(--chat--color-primary);
